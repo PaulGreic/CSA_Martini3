@@ -1,0 +1,51 @@
+[ molecule ]
+BGLCA GLA
+
+[ martini ]
+A B C D VS 
+
+[ atoms ]
+1	C1	A	VS
+2	H1	A	VS
+3	O1	A	VS
+4	HO1	A	VS
+5	C5	C	VS
+6	H5	C	VS
+7	O5	C	VS
+8	C2	A	VS
+9	H2	A	VS
+10	O2	A	VS
+11	HO2	A	VS
+12	C3	B	VS
+13	H3	B	VS
+14	O3	B	VS
+15	HO3	B	VS
+16	C4	B	VS
+17	H4	B	VS
+18	O4	B	VS
+19	HO4	B	VS
+20	C6	D
+21	O61	D
+22	O62	D
+
+;;;;;; Sodium ion
+
+[molecule]
+SOD   NA 
+
+[ martini ]
+NA
+
+[atoms]
+1 SOD NA 
+
+;;;;;; Chloride ion
+
+[molecule]
+CLA   CL 		
+
+[ martini ]
+CL
+
+[atoms]
+1 CLA CL

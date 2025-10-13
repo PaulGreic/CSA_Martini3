@@ -1,0 +1,189 @@
+[ moleculetype ]
+; molname    nrexcl
+  GLA         1
+
+[ atoms ]
+; nr type resnr residue atom cgnr charge mass 
+  1   SP4r   1     GLA    A    1     0    54     
+  2   SP4r   1     GLA    B    2     0    54   
+  3   TN4ar  1     GLA    C    3     0    36 
+  4   SQ5n   1     GLA    D    4    -1  54
+  5   TC4    1     GLA    VS   5     0     0
+
+[ bonds ]
+  1  2    1   0.312  10000 {"group": "GLA", "comment": "GLA_AB", "ifdef": "FLEXIBLE"} ;10% COG scaled
+  1  3    1   0.316  10000 {"group": "GLA", "comment": "GLA_AC", "ifdef": "FLEXIBLE"} ;10% COG scaled
+  2  3    1   0.294  10000 {"group": "GLA", "comment": "GLA_BC", "ifdef": "FLEXIBLE"} ;10% COG scaled
+  3  4    1   0.223  100000 {"group": "GLA", "comment": "GLA_CD"} ;unscaled
+
+[constraints]
+; i  j  funct length
+  1  2    1    0.312 {"group": "GLA", "comment": "GLA_AB", "ifndef": "FLEXIBLE"} ;10% COG scaled
+  1  3    1    0.316 {"group": "GLA", "comment": "GLA_AC", "ifndef": "FLEXIBLE"} ;10% COG scaled
+  2  3    1    0.294 {"group": "GLA", "comment": "GLA_BC", "ifndef": "FLEXIBLE"} ;10% COG scaled
+; 3  4    1    0.225 {"group": "GLA", "comment": "GLA_CD", "ifndef": "FLEXIBLE"} ;unscaled, constraint because Fk > 80000
+
+[angles]
+; i  j  k funct angle fk
+  1  3  4  10   148   290  {"group": "GLA", "comment": "GLA_ACD"}
+  4  3  2  10   105   400  {"group": "GLA", "comment": "GLA_DCB"}
+
+[dihedrals]
+; i  j  k  l  funct  angle  fc
+  4  3  2  1    2     -154    100 {"group": "GLA", "comment": "GLA_DCBA"}
+
+[ exclusions ]
+5 1 2 3 4
+4 2
+
+[ virtual_sitesn ]
+5 1 2 3 -- 1
+
+[ edges ]
+A VS
+
+[ moleculetype ]
+; molname    nrexcl
+  GAL         1
+
+[ atoms ]
+; nr type resnr residue atom cgnr charge mass
+  1   SN6r   1     GAL    A    1     0     54
+  2   SP4r  1     GAL    B    2     0     54
+  3   SP1r  1     GAL    C    3      0     54
+  4   SP3d  1     GAL    D    4      0     54
+  5   Q4n   1     GAL    E    5    -1  54
+  6   TC4   1     GAL   VS    6     0     0
+
+[bonds]
+; i  j  funct length  fk
+  1  2    1   0.269  10000 {"group": "GAL", "comment": "GAL_AB", "ifdef": "FLEXIBLE"} ;10% COG scaled
+  1  3    1   0.384  10000 {"group": "GAL", "comment": "GAL_AC", "ifdef": "FLEXIBLE"} ;10% COG scaled
+  2  3    1   0.346  10000 {"group": "GAL", "comment": "GAL_BC", "ifdef": "FLEXIBLE"} ;10% COG scaled
+  1  4    1   0.348  50000 {"group": "GAL", "comment": "GAL_AD"} ; unscaled
+  2  5    1   0.311  40000 {"group": "GAL", "comment": "GAL_BE"} ; unscaled
+
+[constraints]
+; i  j  funct length
+  1  2    1   0.269  {"group": "GAL", "comment": "GAL_AB", "ifndef": "FLEXIBLE" };10% COG scaled
+  1  3    1   0.384  {"group": "GAL", "comment": "GAL_AC", "ifndef": "FLEXIBLE" };10% COG scaled 
+  2  3    1   0.346  {"group": "GAL", "comment": "GAL_BC", "ifndef": "FLEXIBLE" };10% COG scaled
+
+[ angles ]
+; i  j  k funct angle fk
+  3  1  4   10   160  100 {"group": "GAL", "comment": "GAL_CAD"} 
+  2  1  4   10   100  250 {"group": "GAL", "comment": "GAL_BAD"} 
+  5  2  1   10   126  380 {"group": "GAL", "comment": "GAL_EBA"}
+  5  2  3   10   82   300 {"group": "GAL", "comment": "GAL_EBC"}
+
+[dihedrals]
+; i  j  k  l  funct  angle  fc
+  4  1  3  2    2     -5     20 {"group": "GAL", "comment": "GAL_DACB"}
+  5  2  1  4    2    121    100 {"group": "GAL", "comment": "GAL_EBAD"}    
+
+[ exclusions ]
+6 1 2 3 4 5 
+4 2
+
+[ virtual_sitesn ]
+6 1 2 3 -- 1
+
+[ edges ]
+A VS
+
+;============================================================
+;                   BETA 1,4 LINK
+; needed for D-glucoronic acid to N-acetyl-d-galactosamine
+;============================================================
+
+[ link ]
+[ atoms ]
+A  {"resname": "GLA"}
+B  {"resname": "GLA", "replace": {"atype": "SP1r"}}
+C  {"resname": "GLA"}
++A {"resname": "GAL", "replace": {"atype": "TC3"}}
++B {"resname": "GAL"}
++C {"resname": "GAL"}
+
+[ bonds ]
+; i  j  funct  length  force constant
+  B  +A   1      0.322  8000 {"group": "b14", "comment": "BA_b14"}
+
+[ angles ]
+; i  j  k funct angle force con.
+A   B  +A  10  157   350 {"group": "b14", "comment": "ABA_b14"}
+B  +A  +B  10  143   100 {"group": "b14", "comment": "BAB_b14"}
+B  +A  +C  2   84    120 {"group": "b14", "comment": "BAC_b14"}
+C   B  +A  2   70    120 {"group": "b14", "comment": "BCA_b14"}
+
+[ dihedrals ]
+A  B  +A +B 9 -125  3 2 {"version": "1", "group": "b14", "comment": "ABAB_b14"}
+
+[ dihedral_restraints ]
+A  B  +A  +B 1 -125 0.0 7 {"version": "1", "group": "b14", "comment": "ABAB_b14"}
+
+
+;============================================================
+;                   BETA 1,3 LINK
+; needed for N-acetyl-d-galactosamine D-glucoronic acid
+;============================================================
+
+[ link ]
+[ atoms ]
+A  {"resname": "GAL"}
+B  {"resname": "GAL", "replace": {"atype": "SN6r"}}
+C  {"resname": "GAL"}
++A {"resname": "GLA", "replace": {"atype": "SN6" }}
++B {"resname": "GLA"}
++C {"resname": "GLA"}
+
+[ bonds ]
+; i  j  funct  length  force constant
+  B  +A   1    0.342 20000 {"group": "b13", "comment": "BA_b13"} ;; random interesting drops in bond length that seem related to that rotation of one of the GALs or GLAs i cant remember
+
+[ angles ]
+; i  j  k funct angle force con.
+A   B  +A  10  106   220 {"group": "b13", "comment": "ABA_b13"}
+B  +A  +B  10  125   180 {"group": "b13", "comment": "BAB_b13"}
+B  +A  +C  2   70    150 {"group": "b13", "comment": "BAC_b13"}
+C   B  +A  2   172   2000 {"group": "b13", "comment": "CBA_b13"}
+
+[ dihedrals ]
+A  B  +A  +B 2 -137 70 {"version": "1", "group": "b13", "comment": "ABAB_b13"}
+
+;============================================================
+;                   GAL-GLA-GAL LINK
+;============================================================
+
+[ link ]
+; GAL-GLC-GAL dihedrals
+[ atoms ]
+B  {"resname": "GAL"}
++A  {"resname": "GLA"}
++B  {"resname": "GLA"}
+++A {"resname": "GAL"}
+[ impropers ]
+B  +A  +B ++A 2 8 15 {"version": "1", "group": "b13", "comment": "BABA_b13"}
+
+[ edges ]
+B +A
++A +B
++B ++A
+;============================================================
+;                   GLA-GAL-GLA LINK
+;============================================================
+
+[ link ]
+; GLA-GAL-GLA dihedrals
+[ atoms ]
+B  {"resname": "GLA"}
++A  {"resname": "GAL"}
++B  {"resname": "GAL"}
+++A {"resname": "GLA"}
+[ impropers ]
+B  +A  +B ++A 2 -165 150 {"version": "1", "group": "b14", "comment": "BABA_b14"}
+
+[ edges ]
+B +A
++A +B
++B ++A
