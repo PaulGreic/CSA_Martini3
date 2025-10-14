@@ -1,0 +1,15 @@
+#include "martini_v3.0.0.itp"
+#include "martini_v3.0.0_solvents_v1.itp"
+#include "martini_v3.0.0_ions_v1.itp"
+#include "CSA_21.itp"
+[ system ]
+; name
+CSA chains in water
+
+[ molecules ]
+; name  number
+CSA 4
+NA 571
+CL 487
+W               44309
+NA 28

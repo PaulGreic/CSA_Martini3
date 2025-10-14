@@ -1,0 +1,15 @@
+#include "martini_v3.0.0.itp"
+#include "martini_v3.0.0_solvents_v1.itp"
+#include "martini_v3.0.0_ions_v1.itp"
+#include "CSA_21.itp"
+[ system ]
+; name
+CSA 21 in water
+
+[ molecules ]
+; name  number
+CSA 1
+NA 110
+CL 89
+W               8052
+NA 7

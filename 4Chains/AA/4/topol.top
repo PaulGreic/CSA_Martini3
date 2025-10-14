@@ -1,0 +1,19 @@
+#include "toppar/forcefield.itp"
+#include "toppar/CARB.itp"
+#include "toppar/SOD.itp"
+#include "toppar/CLA.itp"
+#include "toppar/TIP3.itp"
+
+[ system ]
+; name
+4 CSA chains in water
+
+[ molecules ]
+; Compound	#mols
+CARB  	           4
+TIP3        174782
+SOD              571
+CLA              487
+TIP3        174782
+SOD              571
+CLA              487
