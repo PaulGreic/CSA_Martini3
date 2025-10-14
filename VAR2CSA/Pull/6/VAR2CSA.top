@@ -1,0 +1,23 @@
+#define GO_VIRT
+#include "martini_v3.0.0.itp"
+
+#include "molecule.itp"
+#include "CSA_21.itp"
+#ifdef POSRES_LIGAND
+#include "posre_ligand.itp"
+#endif
+
+#include "martini_v3.0.0_solvents_v1.itp"
+#include "martini_v3.0.0_ions_v1.itp"
+
+[ system ]
+var2csa+csa21 in water
+
+[ molecules ]
+molecule    1
+CSA 1
+W           338718
+NA               3873
+CL               3873
+CL               9
+BR               1
