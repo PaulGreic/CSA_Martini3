@@ -1,0 +1,15 @@
+#include "martini_v3.0.0.itp"
+#include "martini_v3.0.0_solvents_v1.itp"
+#include "martini_v3.0.0_ions_v1.itp"
+#include "CSA_123.itp"
+[ system ]
+; name
+CSA 123 in water
+
+[ molecules ]
+; name  number
+CSA 1
+W           966212
+NA               10670
+CL               10670
+NA               164
